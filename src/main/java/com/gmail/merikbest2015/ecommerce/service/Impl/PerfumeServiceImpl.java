@@ -12,6 +12,7 @@ import com.gmail.merikbest2015.ecommerce.service.PerfumeService;
 import graphql.schema.DataFetcher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ import static com.gmail.merikbest2015.ecommerce.constants.ErrorMessage.PERFUME_N
 public class PerfumeServiceImpl implements PerfumeService {
 
     private final PerfumeRepository perfumeRepository;
-    private final AmazonS3 amazonS3client;
+    private final ResourceLoader resourceLoader;
 
     @Value("${amazon.s3.bucket.name}")
     private String bucketName;
@@ -89,22 +90,45 @@ public class PerfumeServiceImpl implements PerfumeService {
     @Override
     @Transactional
     public Perfume savePerfume(Perfume perfume, MultipartFile multipartFile) {
-        if (multipartFile == null) {
-            perfume.setFilename(amazonS3client.getUrl(bucketName, "empty.jpg").toString());
+        if (multipartFile == null || multipartFile.isEmpty()) {
+            // Handle the case where no file is provided or the file is empty
+            // You may want to throw an exception or handle this case according to your requirements
         } else {
-            File file = new File(multipartFile.getOriginalFilename());
-            try (FileOutputStream fos = new FileOutputStream(file)) {
-                fos.write(multipartFile.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
+            try {
+                // Generate a unique filename for the uploaded file
+                String fileName = UUID.randomUUID().toString() + "." + multipartFile.getOriginalFilename();
+
+                // Obtain a reference to the static folder
+                File staticFolder = resourceLoader.getResource("classpath:/static/").getFile();
+
+                // Create the file path in the static resources folder
+                String filePath = staticFolder.getAbsolutePath() + File.separator + fileName;
+                String hostname = "localhost:8080";
+                String filePathToCall = "http://"+ hostname + "/static/" + fileName;
+
+                // Save the file to the specified path
+
+                File file = new File(filePath);
+                try (FileOutputStream fos = new FileOutputStream(file)) {
+                    fos.write(multipartFile.getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Handle the exception appropriately
+                    // You might want to throw an exception here or log the error
+                }
+
+                // Set the filename in the Perfume entity
+                perfume.setFilename(filePathToCall);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                // Handle the exception appropriately
+                // You might want to throw an exception here or log the error
             }
-            String fileName = UUID.randomUUID().toString() + "." + multipartFile.getOriginalFilename();
-            amazonS3client.putObject(new PutObjectRequest(bucketName, fileName, file));
-            perfume.setFilename(amazonS3client.getUrl(bucketName, fileName).toString());
-            file.delete();
         }
         return perfumeRepository.save(perfume);
     }
+
 
     @Override
     @Transactional

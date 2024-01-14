@@ -1,23 +1,36 @@
-import React, { FC, ReactElement } from "react";
-import { Form, Select, Typography } from "antd";
+import React from "react";
+import {Form, Select, Typography} from "antd";
+import { SelectProps } from "antd/lib/select";
 
-type PropsType = {
+interface AddFormSelectProps extends SelectProps<string> {
     title: string;
     name: string;
-    error?: string;
-    placeholder: string;
-    disabled: boolean;
-    values: Array<string>;
-};
+    error?: string | undefined;
+    placeholder?: string;
+    disabled?: boolean;
+    values: string[];
+}
 
-const AddFormSelect: FC<PropsType> = ({ title, name, error, placeholder, disabled, values }): ReactElement => {
+const AddFormSelect: React.FC<AddFormSelectProps> = ({
+                                                         title,
+                                                         name,
+                                                         error,
+                                                         placeholder,
+                                                         disabled,
+                                                         values,
+                                                         ...selectProps
+                                                     }) => {
     return (
-        <Form.Item name={name} help={error} validateStatus={error && "error"}>
-            <Typography.Text>{title}</Typography.Text>
-            <Select placeholder={placeholder} disabled={disabled} style={{ width: "100%" }}>
-                {values.map((option, index) => (
-                    <Select.Option key={index} value={option}>
-                        {option}
+        <Form.Item
+            label={title}
+            name={name}
+            validateStatus={error ? "error" : ""}
+            help={error}
+        >
+            <Select placeholder={placeholder} disabled={disabled} {...selectProps}>
+                {values.map((value) => (
+                    <Select.Option key={value} value={value}>
+                        {value}
                     </Select.Option>
                 ))}
             </Select>

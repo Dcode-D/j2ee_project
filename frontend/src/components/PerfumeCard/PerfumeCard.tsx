@@ -37,7 +37,11 @@ const PerfumeCard: FC<PropsType> = ({ perfume, colSpan, edit, onOpenDelete }): R
                                   <Link to={`${ACCOUNT_ADMIN_PERFUMES}/${perfume.id}`}>
                                       <Button icon={<EditOutlined />}>Edit</Button>
                                   </Link>,
-                                  <Button icon={<DeleteOutlined />} onClick={() => onOpenDelete!(perfume)} danger>
+                                  <Button icon={<DeleteOutlined />} onClick={(event) => {
+                                      // Prevent default behavior only for the delete button
+                                      event.preventDefault();
+                                      onOpenDelete!(perfume);
+                                  }}  danger>
                                       Delete
                                   </Button>
                               ]

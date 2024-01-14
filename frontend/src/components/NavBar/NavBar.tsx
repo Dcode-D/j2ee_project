@@ -23,27 +23,20 @@ const NavBar: FC = (): ReactElement => {
 
     return (
         <>
-            <div className={"navbar-logo-wrapper"}>
-                <img alt={"navbar-logo"} src="https://i.ibb.co/fqYvrL8/LOGO4.jpg" />
-            </div>
             <Affix>
                 <div className={"navbar-wrapper"}>
                     <Row style={{ padding: "0px 400px" }}>
-                        <Col span={12}>
-                            <ul>
-                                <Link to={BASE}>
-                                    <li>HOME</li>
-                                </Link>
+                        <Col span={24}>
+                            <ul className="navbar-menu">
+                                <li>
+                                    <Link to={BASE}>HOME</Link>
+                                </li>
                                 <li>
                                     <Link to={{ pathname: MENU, state: { id: "all" } }}>PERFUMES</Link>
                                 </li>
-                                <Link to={CONTACTS}>
-                                    <li>CONTACTS</li>
-                                </Link>
-                            </ul>
-                        </Col>
-                        <Col span={12}>
-                            <ul>
+                                <li>
+                                    <Link to={CONTACTS}>CONTACTS</Link>
+                                </li>
                                 <li className={"navbar-cart"}>
                                     <Badge count={cartItemsCount} size="small" color={"green"}>
                                         <Link to={CART}>
@@ -53,35 +46,41 @@ const NavBar: FC = (): ReactElement => {
                                 </li>
                                 {usersData ? (
                                     <>
-                                        <Link to={ACCOUNT}>
-                                            <li>
-                                                <UserOutlined />
-                                                MY ACCOUNT
-                                            </li>
-                                        </Link>
-                                        <Link id={"handleLogout"} to={BASE} onClick={handleLogout}>
-                                            <li>
-                                                <LogoutOutlined />
-                                                EXIT
-                                            </li>
-                                        </Link>
+                                        <li>
+                                            <Link to={ACCOUNT}>
+                                                <Space align={"baseline"}>
+                                                    <UserOutlined />
+                                                    MY ACCOUNT
+                                                </Space>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link id={"handleLogout"} to={BASE} onClick={handleLogout}>
+                                                <Space align={"baseline"}>
+                                                    <LogoutOutlined />
+                                                    EXIT
+                                                </Space>
+                                            </Link>
+                                        </li>
                                     </>
                                 ) : (
                                     <>
-                                        <Link to={LOGIN}>
-                                            <li>
+                                        <li>
+                                            <Link to={LOGIN}>
                                                 <Space align={"baseline"}>
                                                     <LoginOutlined />
                                                     SIGN IN
                                                 </Space>
-                                            </li>
-                                        </Link>
-                                        <Link to={REGISTRATION}>
-                                            <li>
-                                                <UserAddOutlined />
-                                                SIGN UP
-                                            </li>
-                                        </Link>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={REGISTRATION}>
+                                                <Space align={"baseline"}>
+                                                    <UserAddOutlined />
+                                                    SIGN UP
+                                                </Space>
+                                            </Link>
+                                        </li>
                                     </>
                                 )}
                             </ul>

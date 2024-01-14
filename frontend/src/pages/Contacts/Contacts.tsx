@@ -18,11 +18,11 @@ const Contacts: FC = (): ReactElement => {
                 <Col span={12}>
                     <div>
                         <Typography.Text strong>{"Mobile: "}</Typography.Text>
-                        <Typography.Text>(066) 696-66-23</Typography.Text>
+                        <Typography.Text>0919386768</Typography.Text>
                     </div>
                     <div>
                         <Typography.Text strong>{"E-mail: "}</Typography.Text>
-                        <Typography.Text>merikbest2015@gmail.com</Typography.Text>
+                        <Typography.Text>dungtribestyasuo@gmail.com</Typography.Text>
                     </div>
                     <div style={{ marginTop: 16 }}>
                         <Typography.Text strong>Working time</Typography.Text>

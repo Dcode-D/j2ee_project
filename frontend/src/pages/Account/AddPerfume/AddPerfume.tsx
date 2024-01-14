@@ -59,12 +59,17 @@ const AddPerfume: FC = (): ReactElement => {
 
     const onFormSubmit = (data: AddPerfumeData): void => {
         const bodyFormData: FormData = new FormData();
-        // @ts-ignore
-        bodyFormData.append("file", { file });
-        bodyFormData.append(
-            "perfume",
-            new Blob([JSON.stringify({ ...data, perfumeRating: 0 })], { type: "application/json" })
-        );
+
+        bodyFormData.append("file", file);
+
+        const jsonData = {
+            ...data,
+            perfumeRating: 0
+        };
+        console.log(jsonData);
+
+        const jsonBlob = new Blob([JSON.stringify(jsonData)], { type: "application/json" });
+        bodyFormData.append("perfume", jsonBlob);
 
         dispatch(addPerfume(bodyFormData));
     };
@@ -110,17 +115,17 @@ const AddPerfume: FC = (): ReactElement => {
                             values={["male", "female"]}
                         />
                         <AddFormInput
-                            title={"Heart notes"}
-                            name={"fragranceMiddleNotes"}
-                            error={perfumeErrors.fragranceMiddleNotesError}
-                            placeholder={"Enter the heart notes"}
-                            disabled={ispPerfumeLoading}
-                        />
-                        <AddFormInput
                             title={"Price"}
                             name={"price"}
                             error={perfumeErrors.priceError}
                             placeholder={"Enter the price"}
+                            disabled={ispPerfumeLoading}
+                        />
+                        <AddFormInput
+                            title={"Middle notes"}
+                            name={"fragranceMiddleNotes"}
+                            error={perfumeErrors.fragranceMiddleNotesError}
+                            placeholder={"Enter the base notes"}
                             disabled={ispPerfumeLoading}
                         />
                     </Col>
@@ -160,6 +165,7 @@ const AddPerfume: FC = (): ReactElement => {
                             placeholder={"Enter the base notes"}
                             disabled={ispPerfumeLoading}
                         />
+
                         <Upload name={"file"} onChange={handleUpload} beforeUpload={() => false}>
                             <Button icon={<UploadOutlined />} style={{ marginTop: 22 }}>
                                 Click to Upload

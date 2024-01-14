@@ -31,6 +31,7 @@ export const updatePerfume = createAsyncThunk<{}, FormData, { rejectValue: Perfu
     "admin/updatePerfume",
     async (data, thunkApi) => {
         try {
+            console.log(data);
             const response = await RequestService.post(ADMIN_EDIT, data, true, "multipart/form-data");
             thunkApi.dispatch(setPerfume(response.data));
             return response.data;

@@ -82,14 +82,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new EmailException(EMAIL_IN_USE);
         }
-        user.setActive(false);
+        user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setProvider(AuthProvider.LOCAL);
-        user.setActivationCode(UUID.randomUUID().toString());
+//        user.setActivationCode(UUID.randomUUID().toString());
+//        user.setActivationCode(null);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
-        sendEmail(user, "Activation code", "registration-template", "registrationUrl", "/activate/" + user.getActivationCode());
+//        sendEmail(user, "Activation code", "registration-template", "registrationUrl", "/activate/" + user.getActivationCode());
         return "User successfully registered.";
     }
 

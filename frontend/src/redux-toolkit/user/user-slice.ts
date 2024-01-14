@@ -45,6 +45,9 @@ export const userSlice = createSlice({
         },
         logoutSuccess(state) {
             state.user = undefined;
+        },
+        setRegistrationSuccess(state, action: PayloadAction<string>) {
+            state.successMessage = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -87,5 +90,5 @@ export const userSlice = createSlice({
     }
 });
 
-export const { setUser, resetInputForm, logoutSuccess } = userSlice.actions;
+export const { setUser, resetInputForm, logoutSuccess, setRegistrationSuccess } = userSlice.actions;
 export default userSlice.reducer;

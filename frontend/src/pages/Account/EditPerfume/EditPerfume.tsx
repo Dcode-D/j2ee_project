@@ -20,6 +20,7 @@ import IconButton from "../../../components/IconButton/IconButton";
 import EditPerfumeSelect from "./EditPerfumeSelect";
 import { updatePerfume } from "../../../redux-toolkit/admin/admin-thunks";
 import "./EditPerfume.css";
+import editPerfumeSelect from "./EditPerfumeSelect";
 
 type EditPerfumeData = {
     perfumeTitle: string;
@@ -72,12 +73,13 @@ const EditPerfume: FC = (): ReactElement => {
     }, [isPerfumeEdited]);
 
     const onFormSubmit = (data: EditPerfumeData): void => {
+        console.log(data)
         const bodyFormData: FormData = new FormData();
         // @ts-ignore
-        bodyFormData.append("file", { file });
+        bodyFormData.append("file", file );
         bodyFormData.append(
             "perfume",
-            new Blob([JSON.stringify({ ...data, id: perfumeData?.id })], { type: "application/json" })
+            new Blob([JSON.stringify({ ...data, id: perfumeData?.id, filename: perfumeData.filename })], { type: "application/json" })
         );
 
         dispatch(updatePerfume(bodyFormData));

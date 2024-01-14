@@ -1,10 +1,15 @@
 import React, { FC, ReactElement, useEffect, useState } from "react";
-import { Col, Divider, Form, Row } from "antd";
+import {Alert, Col, Divider, Form, Row, Modal} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
 import { LockOutlined, MailOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
 
-import { selectErrors, selectIsAuthLoading, selectIsRegistered } from "../../redux-toolkit/auth/auth-selector";
+import {
+    selectErrorMessage,
+    selectErrors,
+    selectIsAuthLoading,
+    selectIsRegistered
+} from "../../redux-toolkit/auth/auth-selector";
 import ContentWrapper from "../../components/ContentWrapper/ContentWrapper";
 import ContentTitle from "../../components/ContentTitle/ContentTitle";
 import { registration } from "../../redux-toolkit/auth/auth-thunks";
@@ -12,6 +17,8 @@ import FormInput from "../../components/FormInput/FormInput";
 import IconButton from "../../components/IconButton/IconButton";
 import { resetAuthState, setAuthLoadingState } from "../../redux-toolkit/auth/auth-slice";
 import { LoadingStatus, UserRegistration } from "../../types/types";
+import {selectSuccessMessage} from "../../redux-toolkit/user/user-selector";
+import {useHistory} from "react-router-dom";
 
 const Registration: FC = (): ReactElement => {
     const dispatch = useDispatch();
@@ -19,6 +26,9 @@ const Registration: FC = (): ReactElement => {
     const isLoading = useSelector(selectIsAuthLoading);
     const errors = useSelector(selectErrors);
     const [captchaValue, setCaptchaValue] = useState<string | null>("");
+    const errorMessage = useSelector(selectErrorMessage);
+    const successMessage = useSelector(selectSuccessMessage);
+    const history = useHistory();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -43,6 +53,11 @@ const Registration: FC = (): ReactElement => {
         window.grecaptcha.reset();
     };
 
+    const handleModalOk = () => {
+        // Redirect to the login page after closing the modal
+        history.push("/login");
+    };
+
     return (
         <ContentWrapper>
             <ContentTitle icon={<UserAddOutlined />} title={"SIGN UP"} />
@@ -50,6 +65,8 @@ const Registration: FC = (): ReactElement => {
                 <Col span={12}>
                     <Form onFinish={onClickSignIn}>
                         <Divider />
+                        {errorMessage && <Alert type="error" message={errorMessage} />}
+                        {successMessage && <Alert type="success" message={successMessage} />}
                         <FormInput
                             title={"E-mail:"}
                             icon={<MailOutlined />}

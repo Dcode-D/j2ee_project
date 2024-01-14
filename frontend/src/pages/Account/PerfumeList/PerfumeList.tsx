@@ -67,6 +67,7 @@ const PerfumeList: FC = (): ReactElement => {
 
     const deletePerfumeHandler = (): void => {
         dispatch(deletePerfume(perfumeInfo?.id!));
+        setIsModalVisible(false);
     };
 
     const handleCancel = (): void => {
