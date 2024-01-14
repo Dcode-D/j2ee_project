@@ -7,7 +7,7 @@ import com.gmail.j2ee.ecommerce.enums.Role;
 import com.gmail.j2ee.ecommerce.domain.User;
 import com.gmail.j2ee.ecommerce.repository.UserRepository;
 import com.gmail.j2ee.ecommerce.security.JwtProvider;
-import com.gmail.merikbest2015.ecommerce.security.oauth2.*;
+import com.gmail.j2ee.ecommerce.security.oauth2.*;
 import com.gmail.j2ee.ecommerce.service.email.MailSender;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;

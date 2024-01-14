@@ -78,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
         String template = "order-template";
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("order", order);
-//        mailSender.sendMessageHtml(order.getEmail(), subject, template, attributes);
+        mailSender.sendMessageHtml(order.getEmail(), subject, template, attributes);
         return order;
     }
 

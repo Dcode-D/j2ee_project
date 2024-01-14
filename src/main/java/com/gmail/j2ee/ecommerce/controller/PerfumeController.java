@@ -16,7 +16,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.gmail.merikbest2015.ecommerce.dto.perfume.*;
 
 import graphql.ExecutionResult;
 import lombok.RequiredArgsConstructor;
