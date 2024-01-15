@@ -1,4 +1,4 @@
-package com.gmail.j2ee.ecommerce.mapper;
+package com.gmail.j2ee.ecommerce.service.email.mapper;
 
 import com.gmail.j2ee.ecommerce.domain.User;
 import com.gmail.j2ee.ecommerce.dto.PasswordResetRequest;

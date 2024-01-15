@@ -6,7 +6,7 @@ import com.gmail.j2ee.ecommerce.dto.HeaderResponse;
 import com.gmail.j2ee.ecommerce.dto.order.OrderItemResponse;
 import com.gmail.j2ee.ecommerce.dto.order.OrderRequest;
 import com.gmail.j2ee.ecommerce.dto.order.OrderResponse;
-import com.gmail.j2ee.ecommerce.mapper.OrderMapper;
+import com.gmail.j2ee.ecommerce.service.email.mapper.OrderMapper;
 import com.gmail.j2ee.ecommerce.security.UserPrincipal;
 import com.gmail.j2ee.ecommerce.service.graphql.GraphQLProvider;
 import graphql.ExecutionResult;

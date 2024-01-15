@@ -9,7 +9,7 @@ import com.gmail.j2ee.ecommerce.dto.perfume.FullPerfumeResponse;
 import com.gmail.j2ee.ecommerce.dto.perfume.PerfumeResponse;
 import com.gmail.j2ee.ecommerce.dto.perfume.PerfumeSearchRequest;
 import com.gmail.j2ee.ecommerce.dto.perfume.SearchTypeRequest;
-import com.gmail.j2ee.ecommerce.mapper.PerfumeMapper;
+import com.gmail.j2ee.ecommerce.service.email.mapper.PerfumeMapper;
 import com.gmail.j2ee.ecommerce.service.graphql.GraphQLProvider;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

@@ -1,7 +1,7 @@
 package com.gmail.j2ee.ecommerce.controller;
 
 import com.gmail.j2ee.ecommerce.dto.RegistrationRequest;
-import com.gmail.j2ee.ecommerce.mapper.AuthenticationMapper;
+import com.gmail.j2ee.ecommerce.service.email.mapper.AuthenticationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

@@ -3,6 +3,7 @@ package com.gmail.j2ee.ecommerce.security;
 import com.gmail.j2ee.ecommerce.domain.User;
 import com.gmail.j2ee.ecommerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,9 +21,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
-//        if (user.getActivationCode() != null) {
-//            throw new LockedException("Email not activated");
-//        }
+        if (!user.isActive()) {
+            throw new LockedException("Email not activated");
+        }
         return UserPrincipal.create(user);
     }
 }

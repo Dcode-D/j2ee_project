@@ -1,4 +1,4 @@
-package com.gmail.j2ee.ecommerce.mapper;
+package com.gmail.j2ee.ecommerce.service.email.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

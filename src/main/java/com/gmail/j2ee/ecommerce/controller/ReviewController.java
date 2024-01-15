@@ -2,7 +2,7 @@ package com.gmail.j2ee.ecommerce.controller;
 
 import com.gmail.j2ee.ecommerce.dto.review.ReviewRequest;
 import com.gmail.j2ee.ecommerce.dto.review.ReviewResponse;
-import com.gmail.j2ee.ecommerce.mapper.ReviewMapper;
+import com.gmail.j2ee.ecommerce.service.email.mapper.ReviewMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

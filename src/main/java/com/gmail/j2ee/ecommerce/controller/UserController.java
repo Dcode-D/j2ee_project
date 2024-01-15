@@ -5,7 +5,7 @@ import com.gmail.j2ee.ecommerce.dto.GraphQLRequest;
 import com.gmail.j2ee.ecommerce.dto.perfume.PerfumeResponse;
 import com.gmail.j2ee.ecommerce.dto.user.UpdateUserRequest;
 import com.gmail.j2ee.ecommerce.dto.user.UserResponse;
-import com.gmail.j2ee.ecommerce.mapper.UserMapper;
+import com.gmail.j2ee.ecommerce.service.email.mapper.UserMapper;
 import com.gmail.j2ee.ecommerce.security.UserPrincipal;
 import com.gmail.j2ee.ecommerce.service.graphql.GraphQLProvider;
 import graphql.ExecutionResult;

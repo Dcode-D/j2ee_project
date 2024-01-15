@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserInfo(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new ApiRequestException(EMAIL_NOT_FOUND, HttpStatus.NOT_FOUND));
+                .orElse(null);
     }
 
     @Override

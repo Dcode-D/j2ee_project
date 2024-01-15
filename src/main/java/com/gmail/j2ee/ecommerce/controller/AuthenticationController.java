@@ -3,7 +3,7 @@ package com.gmail.j2ee.ecommerce.controller;
 import com.gmail.j2ee.ecommerce.dto.PasswordResetRequest;
 import com.gmail.j2ee.ecommerce.dto.auth.AuthenticationRequest;
 import com.gmail.j2ee.ecommerce.dto.auth.AuthenticationResponse;
-import com.gmail.j2ee.ecommerce.mapper.AuthenticationMapper;
+import com.gmail.j2ee.ecommerce.service.email.mapper.AuthenticationMapper;
 import com.gmail.j2ee.ecommerce.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
